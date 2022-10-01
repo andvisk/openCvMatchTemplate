@@ -43,17 +43,26 @@ sourceSets {
     }
 }
 
-import org.apache.tools.ant.taskdefs.condition.Os
-
 test {
     useJUnitPlatform()
 }
 
-run {
+import org.apache.tools.ant.taskdefs.condition.Os
+
+tasks.withType(JavaExec) {
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        systemProperties['java.library.path'] = 'C:/opencv/build/java/x64'
+        systemProperty("java.library.path", "C:/opencv/build/java/x64")
     } else {
-        systemProperties['java.library.path'] = '/usr/local/share/java/opencv4'
-    }    
+        systemProperty("java.library.path", "/usr/local/share/java/opencv4")
+    }  
 }
+
+tasks.withType(Test){
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        systemProperty("java.library.path", "C:/opencv/build/java/x64")
+    } else {
+        systemProperty("java.library.path", "/usr/local/share/java/opencv4")
+    }  
+}
+
 

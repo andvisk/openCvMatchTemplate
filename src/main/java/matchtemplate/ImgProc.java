@@ -1,6 +1,8 @@
 package matchtemplate;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +19,9 @@ public class ImgProc {
 
     private static Logger log = LogManager.getLogger(ImgProc.class);
 
-    public static void matchTemplate() {
+    public static Map<Integer, Integer> matchTemplate() {
+
+        Map<Integer, Integer> mapRet = new HashMap<>();
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
@@ -61,9 +65,14 @@ public class ImgProc {
                     break;
                 }
             }
+
+            mapRet.put(i, matches);
+
             log.info(i + " found - " + matches);
 
             matches = 0;
         }
+
+        return mapRet;
     }
 }
