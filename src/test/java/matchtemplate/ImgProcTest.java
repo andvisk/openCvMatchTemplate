@@ -19,5 +19,7 @@ public class ImgProcTest {
     void matchTemplateTest(){
         Map<Integer, Integer> map = ImgProc.matchTemplate();
         assertEquals(35, map.get(1));
+        assertEquals(23, map.get(2));
+        assertEquals(6, map.get(3));
     }
 }
